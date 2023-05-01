@@ -36,7 +36,6 @@ export default function UserNode({ id, data, isConnectable }) {
             }
 
             setHandlesCount(handlesCount + 1)
-            console.log(handlesCount)
 
         }
 
@@ -75,7 +74,7 @@ export default function UserNode({ id, data, isConnectable }) {
                 isConnectable={isConnectable}
             />}
 
-            <div>{data.label}</div>
+            <div></div>
         </div>
     );
 }

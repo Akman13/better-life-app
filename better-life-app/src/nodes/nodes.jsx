@@ -1,20 +1,21 @@
 const initialNodes = [
+
     {
         id: '1',
         type: 'user',
         data: {
-            label: <div>Me</div>,
+            label: <h1>Me</h1>,
             width: 150,
             height: 150
         },
         position: { x: 0, y: 0 },
     },
-    // {
-    //     id: '2',
-    //     type: 'input',
-    //     data: { label: 'Input Node' },
-    //     position: { x: 250, y: 25 },
-    // },
+    {
+        id: '2',
+        type: 'output',
+        data: { label: 'Input Node' },
+        position: { x: 250, y: 25 },
+    },
     // {
     //     id: '4',
     //     // you can also pass a React component as a label

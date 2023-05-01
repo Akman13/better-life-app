@@ -1,6 +1,6 @@
 .user-node {
     border: 1px solid black;
-    padding: 15px;
+    padding: 20px;
     background: white;
     width: 150px;
     height: 150px;
@@ -9,6 +9,8 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    background-image: url('./../../../public/images/default-avatar.png');
+    background-size: contain;
 }
 
 .user-node label {

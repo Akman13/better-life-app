@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback } from 'react';
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -19,9 +19,17 @@ import initialEdges from './edges/edges';
 
 // Custom Node template imports
 import UserNode from './nodes/user-node/UserNode';
+import BackgroundNode from './nodes/background-node/BackgroundNode';
+
+import RoleConnectionLine from './components/CustomConnectionLines';
 
 
-const nodeTypes = { user: UserNode };
+
+
+const nodeTypes = {
+  user: UserNode,
+  background: BackgroundNode
+};
 
 let userLoggedIn = true;
 
@@ -45,12 +53,14 @@ export default function App() {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           nodeTypes={nodeTypes}
+          connectionLineComponent={RoleConnectionLine}
         >
           <Controls />
-          <MiniMap nodeStrokeWidth={3} zoomable pannable />
+          {/* <MiniMap nodeStrokeWidth={3} zoomable pannable /> */}
           <Panel />
         </ReactFlow>
-      <HomeSettings nodes={nodes} />
+
+        <HomeSettings nodes={nodes} />
       </ReactFlowProvider>
 
     </div>

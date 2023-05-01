@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -14,14 +18,14 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
 a:hover {
   color: #535bf2;
-}
+} */
 
 body {
   margin: 0;
@@ -32,8 +36,16 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 4.2em;
   line-height: 1.1;
+}
+
+.user-node .react-flow__handle {
+  aspect-ratio: 1;
+  width: 5vw;
+  height: 5vw;
+  max-width: 10px;
+  max-height: 10px;
 }
 
 .react-flow__handle {
