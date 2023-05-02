@@ -5,7 +5,7 @@ import AddHandle from '../../components/AddHandle/AddHandle';
 import RemoveHandle from '../../components/RemoveHandle/RemoveHandle';
 
 export default function UserNode({ id, data, isConnectable }) {
-    const [handlesCount, setHandlesCount] = useState(null)
+    const [handlesCount, setHandlesCount] = useState(1)
     const [handleOne, handleTwo, handleThree, handleFour] = [useRef(false), useRef(false), useRef(false), useRef(false)]
     
     const updateNodeInternals = useUpdateNodeInternals();
@@ -65,7 +65,7 @@ export default function UserNode({ id, data, isConnectable }) {
             <AddHandle onClick={handleAdd} />
             <RemoveHandle onClick={handleRemove} />
 
-            {handleOne.current && <Handle
+            {<Handle
                 id='a'
                 type="source"
                 position={Position.Right}

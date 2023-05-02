@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+
+.wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -16,6 +22,37 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+.react-flow .react-flow__node {
+  height: 40px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-width: 2px;
+  font-weight: 700;
+}
+
+.react-flow .react-flow__edge path,
+.react-flow__connectionline path {
+  stroke-width: 2;
+}
+
+.react-flow .react-flow__handle-top {
+  background-color: rgb(66, 66, 255);
+}
+
+.react-flow .react-flow__handle-right {
+  background-color: green;
+}
+
+.react-flow .react-flow__handle-bottom {
+  background-color: rgb(255, 110, 110);
+}
+
+.react-flow .react-flow__handle-left {
+  background-color: rgb(255, 228, 73);
 }
 
 /* a {
