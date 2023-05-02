@@ -1,0 +1,61 @@
+/* The below is for Achievement nodes (on-going) */
+/* .achievement-ongoing-node {
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    -webkit-clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+    clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+} */
+
+.role-node {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    /* border: 3px dashed blue;  */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: content-box;
+}
+
+.role-node .react-flow__handle {
+    aspect-ratio: 1;
+    width: 5vw;
+    height: 5vw;
+    max-width: 7px;
+    max-height: 7px;
+    background-color: gray;
+}
+
+.role-node label {
+    display: block;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.role-node .react-flow__handle-right {
+    top: inherit;
+    transform: inherit;
+}
+
+.role-node .react-flow__handle-top {
+    left: inherit;
+    transform: inherit;
+}
+
+.role-node .react-flow__handle-left {
+    top: inherit;
+    transform: inherit;
+}
+
+.role-node .react-flow__handle-bottom {
+    left: inherit;
+    transform: inherit;
+}
+

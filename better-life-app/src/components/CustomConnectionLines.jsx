@@ -25,6 +25,21 @@ function roleConnectionLine(fromX, fromY, toX, toY, r) {
         className="animated"
         d={`M${fromX},${fromY} C ${fromX} ${toY} ${fromX} ${toY} ${toX},${toY}`}
       />
+      <circle cx={toX} cy={toY} fill="#fff" r={r} stroke="#222" strokeWidth={1.5} />
+    </g>
+  )
+}
+
+function skillConnectionLine(fromX, fromY, toX, toY, r) {
+  return (
+    <g>
+      <path
+        fill="none"
+        stroke="#222"
+        strokeWidth={1.5}
+        className="animated"
+        d={`M${fromX},${fromY} C ${fromX} ${toY} ${fromX} ${toY} ${toX},${toY}`}
+      />
 
         <polygon
           points={`${toX-r} ${toY}, ${toX-0.5*r} ${toY+r}, ${toX+0.5*r} ${toY+r},${toX+r} ${toY}, ${toX+0.5*r} ${toY-r}, ${toX-0.5*r} ${toY-r}`}
@@ -56,12 +71,14 @@ export default function CustomConnectionLine(
   //  - fromNode.type === 'role': 
   //  - fromNode.type === 'skill'
   const sourceIsUser = fromNode.type === 'user'
-  const sourceIsOutput = fromNode.type === 'output'
+  const sourceIsRole = fromNode.type === 'role'
+    const sourceIsSkill = fromNode.type === 'skill'
 
   return (
     <>
       {sourceIsUser && userConnectionLine(fromX, fromY, toX, toY, 50)}
-      {sourceIsOutput && roleConnectionLine(fromX, fromY, toX, toY, 25)}
+      {sourceIsRole && roleConnectionLine(fromX, fromY, toX, toY, 40)}
+      {sourceIsSkill && skillConnectionLine(fromX, fromY, toX, toY, 25)}
     </>
   )
 };

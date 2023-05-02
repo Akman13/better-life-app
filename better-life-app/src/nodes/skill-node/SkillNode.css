@@ -1,0 +1,47 @@
+.skill-node {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    /* border: 3px dashed blue;  */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: content-box;
+}
+
+.skill-node .react-flow__handle {
+    aspect-ratio: 1;
+    width: 5vw;
+    height: 5vw;
+    max-width: 7px;
+    max-height: 7px;
+    background-color: gray;
+}
+
+.skill-node label {
+    display: block;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.skill-node .react-flow__handle-right {
+    top: inherit;
+    transform: inherit;
+}
+
+.skill-node .react-flow__handle-top {
+    left: inherit;
+    transform: inherit;
+}
+
+.skill-node .react-flow__handle-left {
+    top: inherit;
+    transform: inherit;
+}
+
+.skill-node .react-flow__handle-bottom {
+    left: inherit;
+    transform: inherit;
+}

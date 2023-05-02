@@ -7,7 +7,7 @@ import RemoveHandle from '../../components/RemoveHandle/RemoveHandle';
 export default function UserNode({ id, data, isConnectable }) {
     const [handlesCount, setHandlesCount] = useState(1)
     const [handleOne, handleTwo, handleThree, handleFour] = [useRef(false), useRef(false), useRef(false), useRef(false)]
-    
+
     const updateNodeInternals = useUpdateNodeInternals();
 
 
@@ -42,10 +42,7 @@ export default function UserNode({ id, data, isConnectable }) {
 
         if (handlesCount > 1) {
 
-            if (handlesCount === 1) {
-                handleOne.current = false;
-
-            } else if (handlesCount === 2) {
+            if (handlesCount === 2) {
                 handleTwo.current = false;
 
             } else if (handlesCount === 3) {
@@ -53,8 +50,8 @@ export default function UserNode({ id, data, isConnectable }) {
 
             } else if (handlesCount === 4) {
                 handleFour.current = false;
-
             }
+
             setHandlesCount(handlesCount - 1)
         }
     }

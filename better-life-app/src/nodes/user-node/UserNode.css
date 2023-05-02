@@ -2,19 +2,43 @@
     border: 1px solid black;
     padding: 20px;
     background: white;
-    width: 150px;
-    height: 150px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     background-image: url('./../../../public/images/default-avatar.png');
-    background-size: contain;
+    background-size: cover;
 }
 
 .user-node label {
     display: block;
     color: #777;
     font-size: 12px;
+}
+
+.user-node .react-flow__handle-top {
+    background-color: rgb(66, 66, 255);
+}
+
+.user-node .react-flow__handle-right {
+    background-color: green;
+}
+
+.user-node .react-flow__handle-bottom {
+    background-color: rgb(255, 110, 110);
+}
+
+.user-node .react-flow__handle-left {
+    background-color: rgb(255, 228, 73);
+}
+
+.user-node .react-flow__handle {
+    aspect-ratio: 1;
+    width: 5vw;
+    height: 5vw;
+    max-width: 10px;
+    max-height: 10px;
 }

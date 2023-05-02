@@ -23,13 +23,21 @@ import initialEdges from './edges/edges';
 // Custom Node template imports
 import UserNode from './nodes/user-node/UserNode';
 import BackgroundNode from './nodes/background-node/BackgroundNode';
+import RoleNode from './nodes/role-node/RoleNode';
+import SkillNode from './nodes/skill-node/SkillNode';
 
+// Custom Connection Line import
 import RoleConnectionLine from './components/CustomConnectionLines';
+
+// Utils imports
+import determineSourceHandle from './utils/determineSourceHandle';
 
 
 const nodeTypes = {
+  background: BackgroundNode,
   user: UserNode,
-  background: BackgroundNode
+  role: RoleNode,
+  skill: SkillNode
 };
 
 let id = 3;
@@ -43,7 +51,7 @@ function App() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const reactFlowWrapper = useRef(null);
-  const connectingNode = useRef({ nodeId: null, sourceHandle: '' });
+  const connectingNode = useRef({ nodeId: null, type: '', sourceHandle: { id: '', handleLocation: '', colour: '' } });
 
   const { project, getNode } = useReactFlow();
 
@@ -51,31 +59,27 @@ function App() {
 
 
   const onConnectStart = useCallback((event, { nodeId }) => {
-    connectingNode.current.nodeId = nodeId;
-
     const sourceNode = getNode(nodeId)
+    // console.log('sourceNode', sourceNode)
+
+    connectingNode.current.nodeId = nodeId;
+    connectingNode.current.type = sourceNode.type;
+
     const symbolProp = Object.getOwnPropertySymbols(sourceNode)
     const handleBounds = sourceNode[symbolProp[0]].handleBounds.source
 
-    const handleDistances = [];
-    const cursorCoords = project({ x: event.clientX, y: event.clientY});
+    const cursorCoords = project({ x: event.clientX, y: event.clientY });
 
-    for (let handle of handleBounds) {
-      const [handleId, handleX, handleY] = [handle.id, handle.x, handle.y]
-      console.log('handleId handleX handleY', handleId, handleX, handleY)
+    const sourceHandle = determineSourceHandle(cursorCoords, handleBounds)
 
-      const dx = handleX - cursorCoords.x;
-      const dy = handleY - cursorCoords.y;
+    connectingNode.current.sourceHandle.id = sourceHandle;
+    connectingNode.current.sourceHandle.handleLocation = handleBounds.find(handle => handle.id === sourceHandle).position;
 
-      const distanceToCursor = Math.sqrt(dx**2 + dy**2);
-      handleDistances.push({handleId, distanceToCursor})
+    // TODO - decide on what (if any) colour connection should be there b/w role & skill
+    if (sourceNode.type === 'user') {
+      connectingNode.current.sourceHandle.colour = sourceNode.data.handleColours[connectingNode.current.sourceHandle.handleLocation];
     }
-    
-    const sourceHandle = handleDistances.reduce((cumulativeVal, currentVal) => {
-      return (currentVal['distanceToCursor'] < cumulativeVal['distanceToCursor']) ? currentVal : cumulativeVal
-    }).handleId
 
-    connectingNode.current.sourceHandle = sourceHandle;
 
   }, [project]);
 
@@ -91,18 +95,33 @@ function App() {
         const { top, left } = reactFlowWrapper.current.getBoundingClientRect();
         const id = getId();
 
+        // we are removing the half of the node width (75) to center the new node
         const projectCoords = project({ x: event.clientX - left - 75, y: event.clientY - top });
 
         const newNode = {
           id,
-          // we are removing the half of the node width (75) to center the new node
           position: projectCoords,
-          data: { label: `Node ${id}` },
+          data: {
+            label: `Node ${id}`,
+            parentNodeHandleLocation: connectingNode.current.sourceHandle.handleLocation,
+            parentNodeHandleColour: connectingNode.current.sourceHandle.colour
+          },
         };
 
 
+        if (connectingNode.current.type === 'user') {
+          newNode.type = 'role'
+          newNode.data.label = 'Role'
+
+        } else if (connectingNode.current.type === 'role') {
+          newNode.type = 'skill'
+          newNode.data.label = 'Skill'
+
+        }
+
+
         setNodes((nds) => nds.concat(newNode));
-        setEdges((eds) => eds.concat({ id, source: connectingNode.current.nodeId, target: id, sourceHandle: connectingNode.current.sourceHandle }));
+        setEdges((eds) => eds.concat({ id, source: connectingNode.current.nodeId, target: id, sourceHandle: connectingNode.current.sourceHandle.id }));
       }
     },
     [project]
