@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Handle, Position, useUpdateNodeInternals } from 'reactflow';
 import './UserNode.css'
 import AddHandle from '../../components/AddHandle/AddHandle';
-
+import RemoveHandle from '../../components/RemoveHandle/RemoveHandle';
 
 export default function UserNode({ id, data, isConnectable }) {
     const [handlesCount, setHandlesCount] = useState(null)
@@ -17,7 +17,7 @@ export default function UserNode({ id, data, isConnectable }) {
     }, [handlesCount])
 
 
-    const handleClick = () => {
+    const handleAdd = () => {
 
         if (handlesCount < 4) {
 
@@ -34,17 +34,36 @@ export default function UserNode({ id, data, isConnectable }) {
                 handleFour.current = true;
 
             }
-
             setHandlesCount(handlesCount + 1)
-
         }
+    }
 
+    const handleRemove = () => {
+
+        if (handlesCount > 1) {
+
+            if (handlesCount === 1) {
+                handleOne.current = false;
+
+            } else if (handlesCount === 2) {
+                handleTwo.current = false;
+
+            } else if (handlesCount === 3) {
+                handleThree.current = false;
+
+            } else if (handlesCount === 4) {
+                handleFour.current = false;
+
+            }
+            setHandlesCount(handlesCount - 1)
+        }
     }
 
 
     return (
         <div className="user-node">
-            {handlesCount < 4 && <AddHandle onClick={handleClick} />}
+            <AddHandle onClick={handleAdd} />
+            <RemoveHandle onClick={handleRemove} />
 
             {handleOne.current && <Handle
                 id='a'

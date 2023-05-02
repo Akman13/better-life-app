@@ -56,7 +56,7 @@ export default function App() {
           connectionLineComponent={RoleConnectionLine}
         >
           <Controls />
-          {/* <MiniMap nodeStrokeWidth={3} zoomable pannable /> */}
+          <MiniMap nodeStrokeWidth={3} zoomable pannable />
           <Panel />
         </ReactFlow>
 
